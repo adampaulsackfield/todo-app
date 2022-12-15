@@ -7,17 +7,42 @@ A todo application built using NodeJS, ExpressJS, MySQL and React.
 - [✅] - Todo must have an ID, TITLE, and PRIORITY.
 - [✅] - Follow the MVC (Model, View, Controller) structure.
 - [✅] - Have the following endpoints:
-  - [✅] GET /todos
-  - [✅] GET /todos/:todoId
-  - [✅] POST /todos
-  - [✅] PUT /todos/:todoId
-  - [✅] DELETE /todos/:todoId
+  - [✅] GET /api/todos
+  - [✅] GET /api/todos/:todoId
+  - [✅] POST /api/todos
+  - [✅] PUT /api/todos/:todoId
+  - [✅] DELETE /api/todos/:todoId
 
 ## Extension Features
 
 - [ ] - GET /todos - Add the following query params:
-  - /todos?title=searchText
-  - /todos?priority=asc
-  - /todos?priority=desc
+  - /api/todos?title=searchText
+  - /api/todos?priority=asc
+  - /api/todos?priority=desc
 
 ## Endpoints
+
+- `GET /api/todos` - Returns an array of all Todos
+- `GET /api/todos/1` - Returns the todo with an `ID` of `1`
+- `POST /api/todos` - Create a new todo => `{ "title": "Sample Title", "priority: "high" }`
+- `PUT /api/todos/1` - Updates a todo with an `ID` of `1` => `{ "title": "New Title" }`
+- `DELETE /api/todos/1` - Deleted the todo with an `ID` of `1`
+
+## Testing
+
+- `GET /api/todos`
+  - Should return an array of todos
+- `POST /api/todos`
+  - should return a status code of `201` and the newly created todo
+  - should return a status code of `400` when not provided a priority
+  - should return a status code of `400` when not provided a title
+- `GET /api/todos/:todoId`
+  - should return a status code of `200` and the correct todo if the ID exists
+  - should return a status code of `404` when the ID does not exist
+- `PUT /api/todos/:todoId`
+  - should get a status code of `200` when updating the title
+  - should get a status code of `200` when updating the priority
+  - should get a status code of `404` when the ID does not exist
+- `DELETE /api/todos/:todoId`
+  - should return a status code of `200` when successfully deleting a todo
+  - should return a status code of `404` when the ID does not exist

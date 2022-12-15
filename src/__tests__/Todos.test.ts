@@ -126,7 +126,7 @@ describe('TODOS', () => {
 	});
 
 	describe('PUT /api/todos/:todoId', () => {
-		it('should get a status code of 204 when updating the title', () => {
+		it('should get a status code of 200 when updating the title', () => {
 			const todoId = 1;
 			const updatedTodo = {
 				title: 'I was updated',
@@ -143,7 +143,7 @@ describe('TODOS', () => {
 				});
 		});
 
-		it('should get a status code of 204 when updating the priority', () => {
+		it('should get a status code of 200 when updating the priority', () => {
 			const todoId = 1;
 			const updatedTodo = {
 				priority: 'low',
@@ -178,7 +178,7 @@ describe('TODOS', () => {
 	});
 
 	describe('DELETE /api/todos/:todoId', () => {
-		it('should return a status code of 204 when successfully deleting a todo', () => {
+		it('should return a status code of 200 when successfully deleting a todo', () => {
 			const todoId = 1;
 			const expectedResponse = `Todo with ID:${todoId} has been deleted`;
 
