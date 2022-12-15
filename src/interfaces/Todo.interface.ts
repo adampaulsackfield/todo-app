@@ -1,7 +1,7 @@
-export interface TodoInterface {
+import { BaseTodoInterface } from './BaseTodo.interface';
+
+export interface TodoInterface extends BaseTodoInterface {
 	id: number;
-	title: string;
-	priority: string;
 	created_at: Date;
 	updated_at: Date;
 }
