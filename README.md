@@ -4,13 +4,14 @@ A todo application built using NodeJS, ExpressJS, MySQL and React.
 
 ## Required Features
 
-- [ ] - Todo must have an ID, TITLE, and PRIORITY.
-- [ ] - Follow the MVC (Model, View, Controller) structure.
+- [✅] - Todo must have an ID, TITLE, and PRIORITY.
+- [✅] - Follow the MVC (Model, View, Controller) structure.
 - [ ] - Have the following endpoints:
-  - GET /todos/:todoId
-  - POST /todos
-  - PUT /todos/:todoId
-  - DELETE /todos/:todoId
+  - [✅] GET /todos
+  - [✅] GET /todos/:todoId
+  - [✅ POST /todos
+  - [ ] PUT /todos/:todoId
+  - [ ] DELETE /todos/:todoId
 
 ## Extension Features
 

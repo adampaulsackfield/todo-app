@@ -36,4 +36,21 @@ const createTodo = async (req: Request, res: Response, next: NextFunction) => {
 		next(error);
 	}
 };
-export { getTodos, createTodo };
+
+// GET Todo By ID
+const getTodoById = async (req: Request, res: Response, next: NextFunction) => {
+	const { todoId } = req.params;
+
+	try {
+		const todo = await Todo.findByPk(todoId);
+
+		if (!todo)
+			throw new HttpException(404, '', `Todo with ID:${todoId} does not exist`);
+
+		return res.status(200).send({ success: true, data: todo });
+	} catch (error: any) {
+		next(error);
+	}
+};
+
+export { getTodos, createTodo, getTodoById };
