@@ -10,7 +10,7 @@ A todo application built using NodeJS, ExpressJS, MySQL and React.
   - [✅] GET /todos
   - [✅] GET /todos/:todoId
   - [✅ POST /todos
-  - [ ] PUT /todos/:todoId
+  - [✅] PUT /todos/:todoId
   - [ ] DELETE /todos/:todoId
 
 ## Extension Features

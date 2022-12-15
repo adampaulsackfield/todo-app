@@ -120,7 +120,85 @@ describe('TODOS', () => {
 				.get(`${ENDPOINT}/${todoId}`)
 				.expect(404)
 				.then((res) => {
-					console.log(res.body);
+					expect(res.body.error).toEqual(expectedResponse);
+				});
+		});
+	});
+
+	describe('PUT /api/todos/:todoId', () => {
+		it('should get a status code of 204 when updating the title', () => {
+			const todoId = 1;
+			const updatedTodo = {
+				title: 'I was updated',
+			};
+			const expectedResponse = `Todo ID:${todoId} has been successfully updated`;
+
+			return request(server)
+				.put(`${ENDPOINT}/${todoId}`)
+				.send(updatedTodo)
+				.expect(200)
+				.then((res) => {
+					expect(res.body.success).toBe(true);
+					expect(res.body.data).toEqual(expectedResponse);
+				});
+		});
+
+		it('should get a status code of 204 when updating the priority', () => {
+			const todoId = 1;
+			const updatedTodo = {
+				priority: 'low',
+			};
+			const expectedResponse = `Todo ID:${todoId} has been successfully updated`;
+
+			return request(server)
+				.put(`${ENDPOINT}/${todoId}`)
+				.send(updatedTodo)
+				.expect(200)
+				.then((res) => {
+					expect(res.body.success).toBe(true);
+					expect(res.body.data).toEqual(expectedResponse);
+				});
+		});
+
+		it('should get a status code of 404 when the ID does not exist', () => {
+			const todoId = 1123;
+			const updatedTodo = {
+				priority: 'low',
+			};
+			const expectedResponse = `Todo with ID:${todoId} does not exist`;
+
+			return request(server)
+				.put(`${ENDPOINT}/${todoId}`)
+				.send(updatedTodo)
+				.expect(404)
+				.then((res) => {
+					expect(res.body.error).toEqual(expectedResponse);
+				});
+		});
+	});
+
+	describe('DELETE /api/todos/:todoId', () => {
+		it('should return a status code of 204 when successfully deleting a todo', () => {
+			const todoId = 1;
+			const expectedResponse = `Todo with ID:${todoId} has been deleted`;
+
+			return request(server)
+				.delete(`${ENDPOINT}/${todoId}`)
+				.expect(200)
+				.then((res) => {
+					expect(res.body.success).toBe(true);
+					expect(res.body.data).toEqual(expectedResponse);
+				});
+		});
+
+		it('should return a status code of 404 when the ID does not exist', () => {
+			const todoId = 1123;
+			const expectedResponse = `Todo with ID:${todoId} does not exist`;
+
+			return request(server)
+				.delete(`${ENDPOINT}/${todoId}`)
+				.expect(404)
+				.then((res) => {
 					expect(res.body.error).toEqual(expectedResponse);
 				});
 		});
