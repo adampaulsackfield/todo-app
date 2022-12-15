@@ -95,4 +95,34 @@ describe('TODOS', () => {
 				});
 		});
 	});
+
+	describe('GET /api/todos/:todoId', () => {
+		it('should return a status code of 200 and the correct todo if the ID exists', () => {
+			const todoId = 1;
+			const title = 'Finish Testing';
+			const priority = 'high';
+
+			return request(server)
+				.get(`${ENDPOINT}/${todoId}`)
+				.expect(200)
+				.then((res) => {
+					expect(res.body.success).toBe(true);
+					expect(res.body.data.title).toEqual(title);
+					expect(res.body.data.priority).toEqual(priority);
+				});
+		});
+
+		it('should return a status code of 404 when the ID does not exist', () => {
+			const todoId = 1123;
+			const expectedResponse = `Todo with ID:${todoId} does not exist`;
+
+			return request(server)
+				.get(`${ENDPOINT}/${todoId}`)
+				.expect(404)
+				.then((res) => {
+					console.log(res.body);
+					expect(res.body.error).toEqual(expectedResponse);
+				});
+		});
+	});
 });
