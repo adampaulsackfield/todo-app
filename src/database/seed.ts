@@ -6,14 +6,14 @@ const seedFunction = () => {
 		{
 			id: 1,
 			title: 'Finish Testing',
-			priority: 'high',
+			priority: 3,
 			created_at: new Date(),
 			updated_at: new Date(),
 		},
 		{
 			id: 2,
 			title: 'Finish Todos Endpoints',
-			priority: 'medium',
+			priority: 2,
 			created_at: new Date(),
 			updated_at: new Date(),
 		},

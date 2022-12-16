@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-
+import { Op, QueryError } from 'sequelize';
 import { BaseTodoInterface } from './../interfaces/BaseTodo.interface';
 
 import Todo from '../models/Todo.model';
@@ -8,9 +8,20 @@ import HttpException from '../helpers/http-exception';
 
 // GET Todos - /api/todos
 const getTodos = async (req: Request, res: Response) => {
-	try {
-		const todos: any[] = await Todo.findAll({});
+	const { title, priority } = req.query;
 
+	const queryValues: any = { where: {}, order: [] };
+
+	if (title) {
+		queryValues.where.title = { [Op.like]: `%${title}%` };
+	}
+	if (priority) {
+		queryValues.order[0] = ['priority', priority];
+	}
+
+	try {
+		const todos: any[] = await Todo.findAll(queryValues);
+		console.log(todos);
 		return res.status(200).send({ success: true, data: todos });
 	} catch (error: any) {
 		return res.status(404).send({ success: false, data: error.message });

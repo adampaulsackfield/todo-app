@@ -39,10 +39,102 @@ describe('TODOS', () => {
 					expect(res.body.data).toBeInstanceOf(Array);
 					expect(res.body.data[0]).toMatchObject({
 						title: expect.any(String),
-						priority: expect.any(String),
+						priority: expect.any(Number),
 						created_at: expect.any(String),
 					});
 					expect(res.body.data.length).toBe(2);
+				});
+		});
+
+		it('should be able to find todos using their title', () => {
+			const searchTerm = 'Testing';
+
+			const expectedResponse = [
+				{
+					id: '1',
+					title: 'Finish Testing',
+					priority: 3,
+					created_at: expect.any(String),
+					updated_at: expect.any(String),
+				},
+			];
+
+			return request(server)
+				.get(`${ENDPOINT}?title=${searchTerm}`)
+				.expect(200)
+				.then((res) => {
+					expect(res.body.success).toBe(true);
+					expect(res.body.data).toEqual(expectedResponse);
+				});
+		});
+
+		it('should return an empty array if the title does not match any todos', () => {
+			const searchTerm = 'I eat cats';
+
+			const expectedResponse: any = [];
+
+			return request(server)
+				.get(`${ENDPOINT}?title=${searchTerm}`)
+				.expect(200)
+				.then((res) => {
+					expect(res.body.success).toBe(true);
+					expect(res.body.data).toEqual(expectedResponse);
+				});
+		});
+
+		it('should be able to sort the results by priority in ascending order', () => {
+			const searchTerm = 'ASC';
+
+			const expectedResponse = [
+				{
+					id: '2',
+					title: 'Finish Todos Endpoints',
+					priority: 2,
+					created_at: expect.any(String),
+					updated_at: expect.any(String),
+				},
+				{
+					id: '1',
+					title: 'Finish Testing',
+					priority: 3,
+					created_at: expect.any(String),
+					updated_at: expect.any(String),
+				},
+			];
+
+			return request(server)
+				.get(`${ENDPOINT}?priority=${searchTerm}`)
+				.expect(200)
+				.then((res) => {
+					expect(res.body.data).toEqual(expectedResponse);
+				});
+		});
+
+		it('should be able to sort the results by priority in descending order', () => {
+			const searchTerm = 'DESC';
+
+			const expectedResponse = [
+				{
+					id: '1',
+					title: 'Finish Testing',
+					priority: 3,
+					created_at: expect.any(String),
+					updated_at: expect.any(String),
+				},
+				{
+					id: '2',
+					title: 'Finish Todos Endpoints',
+					priority: 2,
+					created_at: expect.any(String),
+					updated_at: expect.any(String),
+				},
+			];
+
+			return request(server)
+				.get(`${ENDPOINT}?priority=${searchTerm}`)
+				.expect(200)
+				.then((res) => {
+					expect(res.body.data).toEqual(expectedResponse);
 				});
 		});
 	});
@@ -51,13 +143,13 @@ describe('TODOS', () => {
 		it('should return a status code of 201 and the newly created todo', () => {
 			const todo = {
 				title: 'Pass this test',
-				priority: 'low',
+				priority: 1,
 			};
 
 			const expectedResponse = {
 				id: expect.any(String),
 				title: 'Pass this test',
-				priority: 'low',
+				priority: 1,
 				created_at: expect.any(String),
 				updated_at: expect.any(String),
 			};
@@ -109,7 +201,7 @@ describe('TODOS', () => {
 		it('should return a status code of 200 and the correct todo if the ID exists', () => {
 			const todoId = 1;
 			const title = 'Finish Testing';
-			const priority = 'high';
+			const priority = 3;
 
 			return request(server)
 				.get(`${ENDPOINT}/${todoId}`)
@@ -155,7 +247,7 @@ describe('TODOS', () => {
 		it('should get a status code of 200 when updating the priority', () => {
 			const todoId = 1;
 			const updatedTodo = {
-				priority: 'low',
+				priority: 1,
 			};
 			const expectedResponse = `Todo ID:${todoId} has been successfully updated`;
 
