@@ -20,6 +20,13 @@ A todo application built using NodeJS, ExpressJS, MySQL and React.
   - [✅] /api/todos?priority=asc
   - [✅] /api/todos?priority=desc
 
+## Custom Extension
+
+- [✅] - Tested all `endpoints` with `Jest`
+- [✅] - TypeScript
+- [✅] - Custom Logger
+- [✅] - Custom Errors
+
 ## Endpoints
 
 - `GET /api/todos` - Returns an array of all Todos
@@ -32,6 +39,9 @@ A todo application built using NodeJS, ExpressJS, MySQL and React.
 
 - `GET /api/todos`
   - Should return an array of todos
+  - Should be able to search from `title` Example: `/api/todos?title='clean'`
+  - Should sort results `ASC` in `priority` Example: `/api/todos?priority=ASC`
+  - Should sort results `DESC` in `priority` Example: `/api/todos?priority=DESC`
 - `POST /api/todos`
   - should return a status code of `201` and the newly created todo
   - should return a status code of `400` when not provided a priority
