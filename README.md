@@ -15,10 +15,10 @@ A todo application built using NodeJS, ExpressJS, MySQL and React.
 
 ## Extension Features
 
-- [ ] - GET /todos - Add the following query params:
-  - /api/todos?title=searchText
-  - /api/todos?priority=asc
-  - /api/todos?priority=desc
+- [✅] - GET /todos - Add the following query params:
+  - [✅] /api/todos?title=searchText
+  - [✅] /api/todos?priority=asc
+  - [✅] /api/todos?priority=desc
 
 ## Endpoints
 

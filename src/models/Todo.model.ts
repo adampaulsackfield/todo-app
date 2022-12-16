@@ -14,7 +14,7 @@ const Todo = sequelize.define(
 			allowNull: false,
 		},
 		priority: {
-			type: DataTypes.STRING,
+			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
 	},
