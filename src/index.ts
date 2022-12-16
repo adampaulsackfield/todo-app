@@ -10,6 +10,7 @@ import notFoundHandler from './middleware/not-found.middleware';
 
 // Router Imports
 import todosRouter from './routes/Todo.routes';
+import usersRouter from './routes/User.routes';
 
 // Middleware Imports
 import connectDB from './database/connectDb';
@@ -34,6 +35,7 @@ server.use('/api/healthcheck', (req, res) =>
 );
 
 server.use('/api/todos', todosRouter);
+server.use('/api/users', usersRouter);
 
 // Error Handling
 server.use(errorHandler);
