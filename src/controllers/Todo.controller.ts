@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { Op, QueryError } from 'sequelize';
+import { Op } from 'sequelize';
 import { BaseTodoInterface } from './../interfaces/BaseTodo.interface';
 
 import Todo from '../models/Todo.model';
