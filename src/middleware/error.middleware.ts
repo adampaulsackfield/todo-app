@@ -2,6 +2,7 @@ import HttpException from '../helpers/http-exception';
 
 import { Request, Response, NextFunction } from 'express';
 
+// Error handling middleware, uses our HTTP-exception
 const errorHandler = (
 	error: HttpException,
 	request: Request,

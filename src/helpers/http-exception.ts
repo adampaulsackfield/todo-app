@@ -1,3 +1,5 @@
+// Standard HTTP-Exception helper for handling error messages gracefully.
+
 class HttpException extends Error {
 	statusCode?: number;
 	status?: number;

@@ -1,20 +1,29 @@
+// Imports
 import request from 'supertest';
+import { sequelize } from '../database';
+
+// Server
 import server from '../index';
 
+// Database helpers
+import preSeedFunction from '../database/pre-seed';
 import seedFunction from '../database/seed';
 
-import { sequelize } from '../database';
-import preSeedFunction from '../database/pre-seed';
-
+// Before each test we want to seed the DB
 beforeEach(() => {
 	return sequelize.sync({ force: true }).then(() => {
-		// Load the seed data into the database
 		return seedFunction();
 	});
 });
 
+// After each test we want to drop the DB
 afterEach(() => {
 	return preSeedFunction();
+});
+
+// After all tests we want to close the connection
+afterAll(() => {
+	sequelize.close();
 });
 
 const ENDPOINT = '/api/todos';

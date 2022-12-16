@@ -1,6 +1,7 @@
 import logger from '../helpers/logger';
 import { sequelize } from '../database/';
 
+// Function to connect to the Database
 const connectDB = async () => {
 	try {
 		await sequelize.sync();
