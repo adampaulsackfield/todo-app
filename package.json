@@ -5,12 +5,14 @@
 	"main": "src/index.ts",
 	"scripts": {
 		"dev": "ts-node-dev --respawn --pretty --transpile-only src/listen.ts",
-		"test": "jest"
+		"test": "jest --runInBand"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"@types/bcrypt": "^5.0.0",
+		"bcrypt": "^5.1.0",
 		"chalk": "^4.1.2",
 		"cors": "^2.8.5",
 		"dotenv": "^16.0.3",
