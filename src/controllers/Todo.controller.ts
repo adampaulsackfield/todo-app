@@ -6,7 +6,7 @@ import { BaseTodoInterface } from './../interfaces/BaseTodo.interface';
 import Todo from '../models/Todo.model';
 import HttpException from '../helpers/http-exception';
 
-// GET Todos
+// GET Todos - /api/todos
 const getTodos = async (req: Request, res: Response) => {
 	try {
 		const todos: any[] = await Todo.findAll({});
@@ -17,7 +17,7 @@ const getTodos = async (req: Request, res: Response) => {
 	}
 };
 
-// POST Todo
+// POST Todo  - /api/todos
 const createTodo = async (req: Request, res: Response, next: NextFunction) => {
 	const { title, priority }: BaseTodoInterface = req.body;
 	try {
@@ -37,7 +37,7 @@ const createTodo = async (req: Request, res: Response, next: NextFunction) => {
 	}
 };
 
-// GET Todo By ID
+// GET Todo By ID - /api/todos/:todoId
 const getTodoById = async (req: Request, res: Response, next: NextFunction) => {
 	const { todoId } = req.params;
 
@@ -53,7 +53,7 @@ const getTodoById = async (req: Request, res: Response, next: NextFunction) => {
 	}
 };
 
-// PUT Update Todo By ID
+// PUT Update Todo By ID - /api/todos/:todoId
 const updateTodoById = async (
 	req: Request,
 	res: Response,
@@ -77,6 +77,7 @@ const updateTodoById = async (
 	}
 };
 
+// DELETE Delete a Todo By ID - /api/todos/:todoId
 const deleteTodoById = async (
 	req: Request,
 	res: Response,

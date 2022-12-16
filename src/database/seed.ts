@@ -1,5 +1,6 @@
 import Todo from '../models/Todo.model';
 
+// Used to seed todos before testing begins
 const seedFunction = () => {
 	return Todo.bulkCreate([
 		{

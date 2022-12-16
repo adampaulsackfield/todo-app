@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
+// Catch all for not found endpoints
 const notFoundHandler = (
 	request: Request,
 	response: Response,
@@ -7,7 +8,7 @@ const notFoundHandler = (
 ) => {
 	const message = 'Resource not found';
 
-	response.status(404).send(message);
+	response.status(404).send({ success: false, data: message });
 };
 
 export default notFoundHandler;
