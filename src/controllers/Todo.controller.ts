@@ -7,7 +7,7 @@ import Todo from '../models/Todo.model';
 import HttpException from '../helpers/http-exception';
 
 // GET Todos - /api/todos
-const getTodos = async (req: Request, res: Response) => {
+const getTodos = async (req: Request, res: Response): Promise<Response> => {
 	const { title, priority } = req.query;
 
 	const queryValues: any = { where: {}, order: [] };
@@ -15,6 +15,7 @@ const getTodos = async (req: Request, res: Response) => {
 	if (title) {
 		queryValues.where.title = { [Op.like]: `%${title}%` };
 	}
+
 	if (priority) {
 		queryValues.order[0] = ['priority', priority];
 	}
@@ -29,12 +30,20 @@ const getTodos = async (req: Request, res: Response) => {
 };
 
 // POST Todo  - /api/todos
-const createTodo = async (req: Request, res: Response, next: NextFunction) => {
+const createTodo = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<Response | void> => {
 	const { title, priority }: BaseTodoInterface = req.body;
+
 	try {
 		if (!title || !priority)
 			throw new HttpException(400, '', 'Missing required fields');
 
+		if (priority < 1 || priority > 5) {
+			throw new HttpException(400, '', 'Priority must be between 1-5');
+		}
 		const todo: any = await Todo.create({
 			id: uuidv4(),
 			title,
@@ -48,7 +57,11 @@ const createTodo = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 // GET Todo By ID - /api/todos/:todoId
-const getTodoById = async (req: Request, res: Response, next: NextFunction) => {
+const getTodoById = async (
+	req: Request,
+	res: Response,
+	next: NextFunction
+): Promise<Response | void> => {
 	const { todoId } = req.params;
 
 	try {
@@ -68,13 +81,14 @@ const updateTodoById = async (
 	req: Request,
 	res: Response,
 	next: NextFunction
-) => {
+): Promise<Response | void> => {
 	const { todoId } = req.params;
 
 	try {
 		const updatedTodo = await Todo.update(req.body, {
 			where: { id: todoId },
 		});
+
 		if (updatedTodo[0] !== 1)
 			throw new HttpException(404, '', `Todo with ID:${todoId} does not exist`);
 
@@ -92,7 +106,7 @@ const deleteTodoById = async (
 	req: Request,
 	res: Response,
 	next: NextFunction
-) => {
+): Promise<Response | void> => {
 	const { todoId } = req.params;
 	try {
 		const deleted = await Todo.destroy({

@@ -1,11 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { Op } from 'sequelize';
 import { BaseUserInterface } from './../interfaces/User/BaseUser.interface';
+import sgMail from '@sendgrid/mail';
 
 import User from '../models/User.model';
 import HttpException from '../helpers/http-exception';
 import hashPassword from '../helpers/hash-password';
+import logger from '../helpers/logger';
 
 // POST User  - /api/users
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
@@ -36,8 +37,24 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
 			password: hashedPassword,
 		});
 
+		// sgMail.setApiKey(`${process.env.SEND_GRID_API_KEY}`);
+		// const msg = {
+		// 	to: email,
+		// 	from: 'support.3n2c1@simplelogin.com',
+		// 	subject:
+		// 		'Todo-APP - Confirm your email address to finish setting up your account.',
+		// 	text: 'Token link will be added here',
+		// 	html: '<strong>Can add HTML</strong>',
+		// };
+
+		// await sgMail.send(msg);
+
 		return res.status(201).send({ success: true, data: user });
 	} catch (error: any) {
+		if (error.response) {
+			return next(error.response.body);
+		}
+
 		if (error.name === 'SequelizeValidationError') {
 			return res.status(400).send({ success: false, data: error.message });
 		}

@@ -35,7 +35,7 @@ describe('USERS', () => {
 				first_name: 'Test',
 				last_name: 'User',
 				username: 'username123',
-				email: 'email@example.com',
+				email: 'sackfieldadampaul@gmail.com',
 				password: 'password123',
 			};
 
@@ -44,7 +44,7 @@ describe('USERS', () => {
 				first_name: 'Test',
 				last_name: 'User',
 				username: 'username123',
-				email: 'email@example.com',
+				email: 'sackfieldadampaul@gmail.com',
 				password: expect.any(String),
 				created_at: expect.any(String),
 				updated_at: expect.any(String),
