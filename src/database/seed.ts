@@ -35,7 +35,7 @@ const seedFunction = (data: string) => {
 				updated_at: new Date(),
 			},
 			{
-				id: 2,
+				id: 'e9021747-4a64-4745-bd3f-ba7a004b5e39',
 				first_name: 'Paul',
 				last_name: 'Jones',
 				username: 'user8888',
@@ -43,6 +43,9 @@ const seedFunction = (data: string) => {
 				password: 'password',
 				created_at: new Date(),
 				updated_at: new Date(),
+				isVerified: false,
+				token:
+					'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5MDIxNzQ3LTRhNjQtNDc0NS1iZDNmLWJhN2EwMDRiNWUzOSIsImV4cCI6MTY3MTMyMDMyMCwiaWF0IjoxNjcxMzE2NzIwfQ.LRCHIRA1fzf7SjBjrcjqxHKM24plzAFE10OsueqGHzo',
 			},
 		]);
 	}

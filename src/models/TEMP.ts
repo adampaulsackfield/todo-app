@@ -35,3 +35,4 @@ const todos = [{ /* todo 1 */ }, { /* todo 2 */ }];
 
 const user = await User.findByPk(userId);
 await user.setTodos(todos);
+

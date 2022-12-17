@@ -41,13 +41,8 @@ describe('USERS', () => {
 
 			const expectedResponse = {
 				id: expect.any(String),
-				first_name: 'Test',
-				last_name: 'User',
 				username: 'username123',
-				email: 'sackfieldadampaul@gmail.com',
 				password: expect.any(String),
-				created_at: expect.any(String),
-				updated_at: expect.any(String),
 			};
 
 			return request(server)
@@ -140,6 +135,42 @@ describe('USERS', () => {
 				.then((res) => {
 					expect(res.body.error).toEqual(expectedResponse);
 				});
+		});
+	});
+
+	describe('POST /api/users/verify-email/:token', () => {
+		it('should return a status code of 200 and the matching UserID', () => {
+			const token =
+				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5MDIxNzQ3LTRhNjQtNDc0NS1iZDNmLWJhN2EwMDRiNWUzOSIsImV4cCI6MTY3MTMyMDMyMCwiaWF0IjoxNjcxMzE2NzIwfQ.LRCHIRA1fzf7SjBjrcjqxHKM24plzAFE10OsueqGHzo';
+			const id = 'e9021747-4a64-4745-bd3f-ba7a004b5e39';
+
+			return request(server)
+				.get(`${ENDPOINT}/verify-email/${token}`)
+				.expect(200)
+				.then((res) => {
+					expect(res.body.success).toBe(true);
+					expect(res.body.data.isVerified).toEqual(true);
+					expect(res.body.data.id).toEqual(id);
+				});
+		});
+
+		it('should return a status code of 400 if the token is invalid', () => {
+			const token =
+				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5MDIxNzQ3LTRhNjQtNDc0NS1iZDNmLWJhN2EwMDRiNWUzOSIsImV4cCI6MTY3MTMyMDMyMCwiaWF0IjoxNjcxMzE2NzIwfQ.LRCHIRA1fzf7SjBjrcjqxHKM24plzAFE10OsueqGHzp';
+
+			return request(server)
+				.get(`${ENDPOINT}/verify-email/${token}`)
+				.expect(400)
+				.then((res) => {
+					expect(res.body.error).toEqual('Invalid token');
+				});
+		});
+
+		it('should return a status code of 400 if the token has expired', () => {
+			const token =
+				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5MDIxNzQ3LTRhNjQtNDc0NS1iZDNmLWJhN2EwMDRiNWUzOSIsImV4cCI6MTY3MTMyMDMyMCwiaWF0IjoxNjcxMzE2NzIwfQ.LRCHIRA1fzf7SjBjrcjqxHKM24plzAFE10OsueqGHzo';
+
+			// TODO Implement tests for expired token
 		});
 	});
 });

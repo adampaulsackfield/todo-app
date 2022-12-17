@@ -5,4 +5,6 @@ export interface UserInterface extends BaseUserInterface {
 	id: number;
 	created_at: Date;
 	updated_at: Date;
+	isVerified: boolean;
+	token: string;
 }

@@ -39,13 +39,17 @@ const User = sequelize.define(
 				len: [8, 100],
 			},
 		},
+		isVerified: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: true, // TODO this should be false, once email turned on
+		},
+		token: {
+			type: DataTypes.STRING,
+		},
 	},
 	{
 		updatedAt: 'updated_at',
 		createdAt: 'created_at',
-		defaultScope: {
-			attributes: { exclude: ['password'] },
-		},
 	}
 );
 
