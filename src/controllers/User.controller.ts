@@ -59,7 +59,6 @@ const createUser = async (
 		// };
 
 		// await sgMail.send(msg);
-
 		return res.status(201).send({
 			success: true,
 			data: { id, username, password: hashedPassword },
@@ -91,7 +90,6 @@ const verifyEmail = async (
 
 		// Check that the token is for the correct user
 		const user: any = await User.findByPk(decoded.id);
-
 		if (!user) {
 			throw new HttpException(400, '', 'Invalid token');
 		}

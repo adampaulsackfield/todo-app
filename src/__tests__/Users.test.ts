@@ -141,8 +141,8 @@ describe('USERS', () => {
 	describe('POST /api/users/verify-email/:token', () => {
 		it('should return a status code of 200 and the matching UserID', () => {
 			const token =
-				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5MDIxNzQ3LTRhNjQtNDc0NS1iZDNmLWJhN2EwMDRiNWUzOSIsImV4cCI6MTY3MTMyMDMyMCwiaWF0IjoxNjcxMzE2NzIwfQ.LRCHIRA1fzf7SjBjrcjqxHKM24plzAFE10OsueqGHzo';
-			const id = 'e9021747-4a64-4745-bd3f-ba7a004b5e39';
+				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyNzk2ZjYxLWE4OWEtNDY5OC1hOGMwLWJlOTE5OTM2Y2NhZCIsImV4cCI6MTY3MTMyNTU3OSwiaWF0IjoxNjcxMzIxOTc5fQ.s_qClhstmNdaZEGdSR9fNzchrwOl7T6gsYn7rGO9vP8';
+			const id = '62796f61-a89a-4698-a8c0-be919936ccad';
 
 			return request(server)
 				.get(`${ENDPOINT}/verify-email/${token}`)
@@ -156,7 +156,7 @@ describe('USERS', () => {
 
 		it('should return a status code of 400 if the token is invalid', () => {
 			const token =
-				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5MDIxNzQ3LTRhNjQtNDc0NS1iZDNmLWJhN2EwMDRiNWUzOSIsImV4cCI6MTY3MTMyMDMyMCwiaWF0IjoxNjcxMzE2NzIwfQ.LRCHIRA1fzf7SjBjrcjqxHKM24plzAFE10OsueqGHzp';
+				'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI0ZmIyNGI5LTMyMjgtNDkwNi05YjUzLWEzYmFhZDVmMGQyNyIsImV4cCI6MTY3MTMyNTI2MCwiaWF0IjoxNjcxMzIxNjYwfQ.oYWWIFJeGDIe7Ays0X0QwJFF7Vlf701GNKPntPMJ3Qa';
 
 			return request(server)
 				.get(`${ENDPOINT}/verify-email/${token}`)
