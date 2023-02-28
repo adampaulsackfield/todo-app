@@ -2,6 +2,28 @@
 
 A todo application built using NodeJS, ExpressJS, MySQL and React.
 
+## Docker Setup
+
+Before running the application you will need to create a `.env` file at the root directory. Inside the file add the following fields:
+
+```env
+PORT=5001
+JWT_SECRET=THIS_IS_A_SECRET_KEY_AND_IS_REQUIRED
+
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=password
+DB_NAME=todo_app
+DB_PORT=3306
+TEST_DB=todo_app_test
+```
+
+Once you have the `.env` file and you have Docker installed on the machine, you can run the following command to run docker-compose and start the DB and API containers.
+
+`docker-compose up -d`
+
+Once up and running you can use a HTTP tool like _postman_, _insomnia_, or _thunder client for VSCode_ to make requests to the API. The available endpoints are listed below and would be prepended with `localhost:5001`
+
 ## Required Features
 
 - [✅] - Todo must have an ID, TITLE, and PRIORITY.
