@@ -12,13 +12,13 @@ import seedFunction from '../database/seed';
 // Before each test we want to seed the DB
 beforeEach(() => {
 	return sequelize.sync({ force: true }).then(() => {
-		return seedFunction();
+		seedFunction('todo');
 	});
 });
 
 // After each test we want to drop the DB
 afterEach(() => {
-	return preSeedFunction();
+	preSeedFunction('todo');
 });
 
 // After all tests we want to close the connection
