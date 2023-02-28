@@ -7,5 +7,5 @@ const PORT: number = parseInt(process.env.PORT as string, 10);
 
 // Start the Server
 server.listen(PORT, () => {
-	logger(`Server is running on PORT:${PORT}`, 'INFO');
+  logger(`Server! is HELLO running on PORT:${PORT}`, 'INFO');
 });
